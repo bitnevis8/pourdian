@@ -146,7 +146,7 @@ export const PortfolioContent = () => {
           />
         </div>
         <div className="p-6">
-          <h3 className="text-xl font-bold mb-2">Arya Foulad Qarn CMS</h3>
+          <h3 className="text-xl font-bold mb-2">Arya Foulad Qarn CMS <span className="text-sm font-normal text-green-600">(In Progress)</span></h3>
           <p className="text-gray-600 mb-4">
             A comprehensive CMS system including mission assignment, cost calculation, user management, inventory management, and equipment management.
           </p>
