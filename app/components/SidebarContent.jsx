@@ -94,12 +94,39 @@ export const ResumeContent = () => (
         </ul>
       </div>
       <div className="bg-white p-4 rounded-lg shadow">
-        <h3 className="text-xl font-semibold">IT Manager & Developer</h3>
-        <p className="text-gray-600">Arya Foulad Qarn • Apr 2020 - Nov 2020</p>
+        <h3 className="text-xl font-semibold">Developer</h3>
+        <p className="text-gray-600">Vakili Shelving Company • Feb 2023 - Apr 2023</p>
         <ul className="list-disc list-inside mt-2 text-gray-700 space-y-1">
-          <li>Managing IT infrastructure and development team</li>
-          <li>Developing and maintaining web applications</li>
-          <li>Implementing security measures and best practices</li>
+          <li>Full-stack development and system implementation</li>
+          <li>Designing and developing automation systems</li>
+          <li>Implementing efficient warehouse management solutions</li>
+        </ul>
+      </div>
+      <div className="bg-white p-4 rounded-lg shadow">
+        <h3 className="text-xl font-semibold">Developer & Technical Support</h3>
+        <p className="text-gray-600">IT Arvand Online Store • Mar 2022 - Dec 2022</p>
+        <ul className="list-disc list-inside mt-2 text-gray-700 space-y-1">
+          <li>Developing and maintaining e-commerce platform</li>
+          <li>Providing technical support and troubleshooting</li>
+          <li>Implementing new features and improvements</li>
+        </ul>
+      </div>
+      <div className="bg-white p-4 rounded-lg shadow">
+        <h3 className="text-xl font-semibold">Developer & Automation Designer</h3>
+        <p className="text-gray-600">Pars Decoration Company • Jul 2018 - Jan 2019</p>
+        <ul className="list-disc list-inside mt-2 text-gray-700 space-y-1">
+          <li>Designing and implementing automation systems</li>
+          <li>Developing custom software solutions</li>
+          <li>Managing system integration projects</li>
+        </ul>
+      </div>
+      <div className="bg-white p-4 rounded-lg shadow">
+        <h3 className="text-xl font-semibold">Android Development & Website Management</h3>
+        <p className="text-gray-600">Self Employed • Apr 2016 - Apr 2019</p>
+        <ul className="list-disc list-inside mt-2 text-gray-700 space-y-1">
+          <li>Designing and managing Android programming education website</li>
+          <li>Developing educational content and resources</li>
+          <li>Managing online learning platform</li>
         </ul>
       </div>
     </div>
