@@ -42,7 +42,7 @@ const Sidebar = () => {
     switch (activeSection) {
       case 'about':
         return (
-          <div className="space-y-6">
+          <div className="space-y-6 z-50">
             <div className="md:hidden flex flex-col items-center mb-8">
               <div className="relative w-32 h-32 mb-4 rounded-full overflow-hidden border-4 border-blue-400 shadow-lg shadow-blue-500/20">
                 <Image

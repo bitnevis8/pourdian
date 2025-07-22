@@ -27,12 +27,12 @@ export default function ChatBox() {
   fixed bottom-0 left-0 
   lg:left-64 
   w-full lg:w-[calc(100%-16rem)] 
-  z-50 
+  z-10 
   bg-gradient-to-r 
   from-purple-600 
-  via-indigo-500 
-  via-teal-400 
-  to-green-400
+  via-teal-500 
+  via-sky-900 
+  to-sky-400
   shadow-xl
   backdrop-blur-md
 ">
@@ -46,7 +46,7 @@ export default function ChatBox() {
               }`}
             >
               <span
-                className={`inline-block px-3 py-2 rounded-lg max-w-[80%] whitespace-pre-line ${geistSans.variable} ${geistMono.variable} antialiased ${
+                className={`inline-block geistMono px-3 py-2 rounded-lg max-w-[80%] whitespace-pre-line ${geistSans.variable} ${geistMono.variable} antialiased ${
                   m.role === "user"
                     ? "bg-blue-100 text-blue-900"
                     : "bg-green-100 text-green-900"
@@ -60,7 +60,7 @@ export default function ChatBox() {
         </div>
         <form onSubmit={handleSubmit} className="flex gap-2">
           <input
-            className="flex-1 border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
+            className="flex-1 geistMono text-right border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
             value={input}
             onChange={handleInputChange}
             placeholder="سوال خود را بنویسید..."
