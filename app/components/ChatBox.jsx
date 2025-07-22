@@ -63,7 +63,7 @@ export default function ChatBox() {
             className="flex-1 geistMono text-right border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-300"
             value={input}
             onChange={handleInputChange}
-            placeholder="سوال خود را بنویسید..."
+            placeholder="بپرس | اسأل | Ask"
             disabled={isLoading}
           />
           <button
