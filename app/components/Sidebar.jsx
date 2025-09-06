@@ -106,7 +106,15 @@ const Sidebar = () => {
       <VantaBackground
         effect="net"
         color={0x34e3d8}
-        options={{ maxDistance: 22.0, spacing: 13.0, showDots: false, mouseControls: true, touchControls: true, gyroControls: false }}
+        options={{ 
+          maxDistance: typeof window !== 'undefined' && window.innerWidth < 768 ? 11.0 : 22.0, 
+          spacing: typeof window !== 'undefined' && window.innerWidth < 768 ? 6.5 : 13.0, 
+          showDots: false, 
+          scaleMobile: 1,
+          mouseControls: true, 
+          touchControls: true, 
+          gyroControls: false 
+        }}
       />
       {/* Mobile Menu Button */}
       <button
@@ -118,7 +126,7 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div className={`fixed md:static inset-y-0 left-0 w-64 bg-gradient-to-br from-blue-900/30 via-gray-800/20 to-gray-900/30 backdrop-blur-md text-white p-4 flex flex-col transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 z-40`}>
-        <div className="flex flex-col items-center mb-8 relative z-10 pt-12 md:pt-0">
+        <div className="flex flex-col items-center mb-4 relative z-10 pt-12 md:pt-0">
           <div className="relative w-32 h-32 mb-4 rounded-full overflow-hidden border-4 border-blue-400 shadow-lg shadow-blue-500/20">
             <Image
               src="/profile.jpg"
@@ -133,15 +141,21 @@ const Sidebar = () => {
         </div>
 
         {/* Language Switcher - Mobile Top */}
-        <div className="md:hidden flex justify-center gap-2 mb-4 relative z-10">
+        <div className="md:hidden flex justify-center gap-2 mb-6 relative z-10">
           <button
-            onClick={() => setLocale('fa')}
-            className={`px-3 py-1 rounded ${locale === 'fa' ? 'bg-blue-600 text-white' : 'bg-white/10'}`}
+            onClick={() => {
+              playClick();
+              setLocale('fa');
+            }}
+            className={`px-3 py-1 rounded text-sm ${locale === 'fa' ? 'bg-blue-600 text-white' : 'bg-white/10'}`}
             title="فارسی"
           >{t('nav.switchToFA')}</button>
           <button
-            onClick={() => setLocale('en')}
-            className={`px-3 py-1 rounded ${locale === 'en' ? 'bg-blue-600 text-white' : 'bg-white/10'}`}
+            onClick={() => {
+              playClick();
+              setLocale('en');
+            }}
+            className={`px-3 py-1 rounded text-sm ${locale === 'en' ? 'bg-blue-600 text-white' : 'bg-white/10'}`}
             title="English"
           >{t('nav.switchToEN')}</button>
         </div>
