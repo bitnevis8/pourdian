@@ -200,7 +200,7 @@ const Sidebar = () => {
 
       {/* Content Area */}
       <div className="relative flex-1 overflow-hidden">
-        <div className="relative p-4 md:p-8 overflow-y-auto h-full text-white bg-gradient-to-br from-blue-900/10 via-gray-800/5 to-gray-900/10">
+        <div className="relative p-4 md:p-8 overflow-y-auto h-full text-white bg-gradient-to-br from-blue-900/30 via-gray-800/20 to-gray-900/30">
           {renderContent()}
         </div>
       </div>
