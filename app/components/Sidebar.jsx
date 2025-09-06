@@ -81,7 +81,7 @@ const Sidebar = () => {
                 />
               </div>
               <h1 className="text-2xl font-bold mb-2 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-200">Hossein Pourdian</h1>
-              <p className="text-gray-600 text-sm text-center">Full Stack Developer</p>
+              <p className="text-gray-300 text-sm text-center">Full Stack Developer</p>
             </div>
             <AboutContent />
           </div>
@@ -105,8 +105,8 @@ const Sidebar = () => {
     <div className="relative flex flex-col md:flex-row h-screen">
       <VantaBackground
         effect="net"
-        options={{ color: 0xd976, maxDistance: 22.0, spacing: 14.0, showDots: true,  mouseControls: true,
-          touchControls: true }}
+        color={0x34e3d8}
+        options={{ maxDistance: 22.0, spacing: 13.0, showDots: false, mouseControls: true, touchControls: true, gyroControls: false }}
       />
       {/* Mobile Menu Button */}
       <button
@@ -130,6 +130,20 @@ const Sidebar = () => {
           </div>
           <h1 className="text-2xl font-bold mb-2 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-200">Hossein Pourdian</h1>
           <p className="text-gray-300 text-sm text-center">Full Stack Developer</p>
+        </div>
+
+        {/* Language Switcher - Mobile Top */}
+        <div className="md:hidden flex justify-center gap-2 mb-4 relative z-10">
+          <button
+            onClick={() => setLocale('fa')}
+            className={`px-3 py-1 rounded ${locale === 'fa' ? 'bg-blue-600 text-white' : 'bg-white/10'}`}
+            title="فارسی"
+          >{t('nav.switchToFA')}</button>
+          <button
+            onClick={() => setLocale('en')}
+            className={`px-3 py-1 rounded ${locale === 'en' ? 'bg-blue-600 text-white' : 'bg-white/10'}`}
+            title="English"
+          >{t('nav.switchToEN')}</button>
         </div>
 
         <nav className="flex-1 relative z-10">
@@ -184,7 +198,8 @@ const Sidebar = () => {
           ))}
         </div>
 
-        <div className="mt-4 flex justify-center gap-2 relative z-10">
+        {/* Language Switcher - Desktop Bottom */}
+        <div className="hidden md:flex mt-4 justify-center gap-2 relative z-10">
           <button
             onClick={() => setLocale('fa')}
             className={`px-3 py-1 rounded ${locale === 'fa' ? 'bg-blue-600 text-white' : 'bg-white/10'}`}

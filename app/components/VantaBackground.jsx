@@ -16,11 +16,10 @@ export default function VantaBackground({ effect = "waves", color = 0x1e3a8a, op
       if (destroyed) return;
       const el = containerRef.current;
       if (!el || vantaRef.current) return;
-      // Respect user/system preferences and avoid heavy effects on small screens
+      // Respect user/system preferences only
       try {
         const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const isSmallScreen = typeof window !== 'undefined' && window.innerWidth < 768;
-        if (prefersReducedMotion || isSmallScreen) {
+        if (prefersReducedMotion) {
           return;
         }
       } catch (_) {}
