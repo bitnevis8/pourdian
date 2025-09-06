@@ -13,7 +13,9 @@ export const AboutContent = () => {
   return (
     <div className="space-y-6">
       <h2 className={`text-3xl font-bold mb-4 text-center ${alignH2} text-white`}>{t('about.title')}</h2>
-      <p className="text-white/90 leading-relaxed">{t('about.intro')}</p>
+      <div className="relative rounded-xl overflow-hidden p-4 md:p-5 bg-white/5 backdrop-blur-sm border border-white/10">
+        <p className="text-white/90 leading-relaxed">{t('about.intro')}</p>
+      </div>
       <div className="mt-8">
         <h3 className="text-xl font-semibold mb-4 text-white">{t('about.technicalSkills')}</h3>
         <div className="space-y-6">
