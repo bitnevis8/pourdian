@@ -26,7 +26,7 @@ const Sidebar = () => {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     if (!clickAudioRef.current) {
-      const audio = new Audio('/sounds/mixkit-sci-fi-click-900.wav');
+      const audio = new Audio('/mixkit-sci-fi-click-900.wav');
       audio.preload = 'auto';
       audio.volume = 0.25;
       clickAudioRef.current = audio;
@@ -102,7 +102,12 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
+    <div className="relative flex flex-col md:flex-row h-screen">
+      <VantaBackground
+        effect="net"
+        options={{ color: 0xd976, maxDistance: 22.0, spacing: 14.0, showDots: true,  mouseControls: true,
+          touchControls: true }}
+      />
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -112,10 +117,7 @@ const Sidebar = () => {
       </button>
 
       {/* Sidebar */}
-      <div className={`fixed md:static inset-y-0 left-0 w-64 bg-gradient-to-br from-blue-900/70 via-gray-800/60 to-gray-900/70 backdrop-blur-md text-white p-4 flex flex-col transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 z-40`}>
-        <div className="absolute inset-0 -z-10 rounded-lg opacity-70">
-          <VantaBackground effect="clouds" options={{ skyColor: 0x0b1220, cloudColor: 0x1f3a8a, cloudShadowColor: 0x0b1220, sunGlareColor: 0x334155, sunlightColor: 0x93c5fd }} />
-        </div>
+      <div className={`fixed md:static inset-y-0 left-0 w-64 bg-gradient-to-br from-blue-900/30 via-gray-800/20 to-gray-900/30 backdrop-blur-md text-white p-4 flex flex-col transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 z-40`}>
         <div className="flex flex-col items-center mb-8 relative z-10 pt-12 md:pt-0">
           <div className="relative w-32 h-32 mb-4 rounded-full overflow-hidden border-4 border-blue-400 shadow-lg shadow-blue-500/20">
             <Image
@@ -141,15 +143,11 @@ const Sidebar = () => {
               }}
               className={`relative overflow-hidden w-full p-2 rounded-lg mb-2 transition-all duration-300 select-none ${
                 activeSection === section.id
-                  ? 'text-white shadow-lg shadow-blue-500/20'
-                  : 'text-white/90 hover:text-white hover:bg-white/25 hover:backdrop-blur-md hover:shadow hover:shadow-white/10'
+                  ? 'bg-blue-900/60 text-white shadow-lg shadow-blue-500/20 hover:bg-blue-900/70'
+                  : 'text-white/90 hover:text-white hover:bg-blue-800/30 hover:backdrop-blur-md hover:shadow hover:shadow-white/10'
               }`}
             >
-              {activeSection === section.id && (
-                <div className="absolute inset-0 -z-10 rounded-lg">
-                  <VantaBackground effect="fog" options={{ highlightColor: 0x93c5fd, midtoneColor: 0x3b82f6, lowlightColor: 0x1e3a8a, baseColor: 0x0f172a, blurFactor: 0.6 }} />
-                </div>
-              )}
+              
               <div className="relative z-10 flex items-center gap-2 w-full">
                 <span className="text-xl">{section.icon}</span>
                 <span>{section.title}</span>
@@ -159,21 +157,16 @@ const Sidebar = () => {
         </nav>
 
         <div className="mt-4 relative z-10">
-          <div className="relative overflow-hidden rounded-lg shadow-lg shadow-green-500/20">
-            <div className="absolute inset-0 -z-10">
-              <VantaBackground effect="fog" options={{ highlightColor: 0x22c55e, midtoneColor: 0x16a34a, lowlightColor: 0x14532d, baseColor: 0x052e16, blurFactor: 0.6 }} />
-            </div>
-            <a 
-              href="/resume.pdf" 
-              download
-              className="relative z-10 block w-full text-center p-2 rounded-lg text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm hover:backdrop-blur-md transition-all duration-300"
-            >
-              <span className="inline-flex items-center gap-2 justify-center">
-                <MdDownload />
-                <span>{t('nav.downloadResume')}</span>
-              </span>
-            </a>
-          </div>
+          <a 
+            href="/resume.pdf" 
+            download
+            className="block w-full text-center p-2 rounded-lg text-white bg-gradient-to-r from-green-600/80 to-green-500/80 hover:from-green-500 hover:to-green-400 transition-all duration-300 shadow-lg shadow-green-500/20"
+          >
+            <span className="inline-flex items-center gap-2 justify-center">
+              <MdDownload />
+              <span>{t('nav.downloadResume')}</span>
+            </span>
+          </a>
         </div>
 
         <div className="mt-4 flex justify-center space-x-4 relative z-10">
@@ -207,8 +200,7 @@ const Sidebar = () => {
 
       {/* Content Area */}
       <div className="relative flex-1 overflow-hidden">
-        <VantaBackground effect="net" />
-        <div className="relative p-4 md:p-8 overflow-y-auto h-full text-white bg-gradient-to-br from-blue-900/40 via-gray-800/30 to-gray-900/40 backdrop-blur-sm">
+        <div className="relative p-4 md:p-8 overflow-y-auto h-full text-white bg-gradient-to-br from-blue-900/10 via-gray-800/5 to-gray-900/10">
           {renderContent()}
         </div>
       </div>

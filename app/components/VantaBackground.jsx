@@ -1,11 +1,14 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useMemo } from "react";
 
 export default function VantaBackground({ effect = "waves", color = 0x1e3a8a, options = {} }) {
   const containerRef = useRef(null);
   const vantaRef = useRef(null);
   const rafRef = useRef(0);
+  const optionsHash = useMemo(() => {
+    try { return JSON.stringify(options); } catch (_) { return "{}"; }
+  }, [options]);
 
   useEffect(() => {
     let destroyed = false;
@@ -13,6 +16,14 @@ export default function VantaBackground({ effect = "waves", color = 0x1e3a8a, op
       if (destroyed) return;
       const el = containerRef.current;
       if (!el || vantaRef.current) return;
+      // Respect user/system preferences and avoid heavy effects on small screens
+      try {
+        const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isSmallScreen = typeof window !== 'undefined' && window.innerWidth < 768;
+        if (prefersReducedMotion || isSmallScreen) {
+          return;
+        }
+      } catch (_) {}
       const rect = el.getBoundingClientRect();
       if (rect.width === 0 || rect.height === 0) {
         rafRef.current = requestAnimationFrame(tryInit);
@@ -68,7 +79,7 @@ export default function VantaBackground({ effect = "waves", color = 0x1e3a8a, op
       try { vantaRef.current?.destroy?.(); } catch (_) {}
       vantaRef.current = null;
     };
-  }, [effect, color]);
+  }, [effect, color, optionsHash]);
 
   return <div ref={containerRef} className="absolute inset-0 -z-10" aria-hidden="true" />;
 }

@@ -22,8 +22,8 @@ export default function VantaBadge({ children, effect = "fog", options = {} }) {
               highlightColor: 0x93c5fd,
               midtoneColor: 0x3b82f6,
               lowlightColor: 0x1e3a8a,
-              baseColor: 0x0b1220,
-              blurFactor: 0.5,
+              baseColor: 0xd976,
+              blurFactor: 0.1,
               ...options,
             }}
           />

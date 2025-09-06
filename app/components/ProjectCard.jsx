@@ -1,27 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import dynamic from "next/dynamic";
-import { useState } from "react";
 import VantaBadge from "./VantaBadge";
 
-const VantaBackground = dynamic(() => import("./VantaBackground"), { ssr: false });
-
-export default function ProjectCard({ imageSrc, imageAlt, title, description, chips = [], href, visitLabel = 'Visit Project', vantaEffect = "fog", vantaOptions = {} }) {
-  const [hovered, setHovered] = useState(true);
+export default function ProjectCard({ imageSrc, imageAlt, title, description, chips = [], href, visitLabel = 'Visit Project' }) {
 
   return (
     <div
       className="group relative rounded-xl overflow-hidden border border-white/10 bg-white/10 backdrop-blur-sm shadow-lg transition-transform duration-300 hover:-translate-y-1"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(true)}
     >
       <div className="relative w-full h-48">
-        {hovered && (
-          <div className="absolute inset-0 -z-10 opacity-80">
-            <VantaBackground effect={vantaEffect} options={vantaOptions} />
-          </div>
-        )}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-cyan-400/50 via-cyan-600/40 to-blue-900/70" aria-hidden="true" />
         <Image src={imageSrc} alt={imageAlt} fill className="object-contain" priority />
       </div>
       <div className="p-6">

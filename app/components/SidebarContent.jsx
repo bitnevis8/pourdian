@@ -4,7 +4,7 @@ import Image from 'next/image';
 import ChatBox from './ChatBox';
 import { useLanguage } from '../context/LanguageContext';
 import VantaBadge from './VantaBadge';
-import VantaBackground from './VantaBackground';
+// import VantaBackground from './VantaBackground';
 import ProjectCard from './ProjectCard';
 
 export const AboutContent = () => {
@@ -18,9 +18,6 @@ export const AboutContent = () => {
         <h3 className="text-xl font-semibold mb-4 text-white">{t('about.technicalSkills')}</h3>
         <div className="space-y-6">
           <div className="relative rounded-xl overflow-hidden p-4 md:p-5 bg-white/5 backdrop-blur-sm border border-white/10">
-            <div className="absolute inset-0 -z-10 opacity-70">
-              <VantaBackground effect="clouds" options={{ skyColor: 0x0b1220, cloudColor: 0x1f3a8a, cloudShadowColor: 0x0b1220, sunGlareColor: 0x334155, sunlightColor: 0x93c5fd }} />
-            </div>
             <h4 className="text-lg font-medium mb-2 text-white">{t('about.programming')}</h4>
             <div className="flex flex-wrap gap-2">
               {[
@@ -32,9 +29,6 @@ export const AboutContent = () => {
             </div>
           </div>
           <div className="relative rounded-xl overflow-hidden p-4 md:p-5 bg-white/5 backdrop-blur-sm border border-white/10">
-            <div className="absolute inset-0 -z-10 opacity-70">
-              <VantaBackground effect="clouds" options={{ skyColor: 0x0b1220, cloudColor: 0x1f3a8a, cloudShadowColor: 0x0b1220, sunGlareColor: 0x334155, sunlightColor: 0x93c5fd }} />
-            </div>
             <h4 className="text-lg font-medium mb-2 text-white">{t('about.webDesign')}</h4>
             <div className="flex flex-wrap gap-2">
               {[
@@ -46,9 +40,6 @@ export const AboutContent = () => {
             </div>
           </div>
           <div className="relative rounded-xl overflow-hidden p-4 md:p-5 bg-white/5 backdrop-blur-sm border border-white/10">
-            <div className="absolute inset-0 -z-10 opacity-70">
-              <VantaBackground effect="clouds" options={{ skyColor: 0x0b1220, cloudColor: 0x1f3a8a, cloudShadowColor: 0x0b1220, sunGlareColor: 0x334155, sunlightColor: 0x93c5fd }} />
-            </div>
             <h4 className="text-lg font-medium mb-2 text-white">{t('about.networkSystems')}</h4>
             <div className="flex flex-wrap gap-2">
               {[
@@ -59,9 +50,6 @@ export const AboutContent = () => {
             </div>
           </div>
           <div className="relative rounded-xl overflow-hidden p-4 md:p-5 bg-white/5 backdrop-blur-sm border border-white/10">
-            <div className="absolute inset-0 -z-10 opacity-70">
-              <VantaBackground effect="clouds" options={{ skyColor: 0x0b1220, cloudColor: 0x1f3a8a, cloudShadowColor: 0x0b1220, sunGlareColor: 0x334155, sunlightColor: 0x93c5fd }} />
-            </div>
             <h4 className="text-lg font-medium mb-2 text-white">{t('about.designCMS')}</h4>
             <div className="flex flex-wrap gap-2">
               {[
