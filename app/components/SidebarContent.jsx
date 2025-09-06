@@ -243,7 +243,6 @@ export const PricingTermsContent = () => {
         <ul className="list-disc list-inside text-white/90 space-y-1 leading-relaxed">
           <li>{t('pricing.termPhases')}</li>
           <li>{t('pricing.termBugs')}</li>
-          <li>{t('pricing.termCredit')}</li>
         </ul>
       </div>
 
@@ -252,6 +251,41 @@ export const PricingTermsContent = () => {
         <p className="text-white/90 leading-relaxed">
           {t('pricing.timelineText')}
         </p>
+      </div>
+
+      <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg shadow border border-white/10">
+        <h3 className="text-xl font-semibold mb-2 text-white">{t('pricing.copyrightTitle')}</h3>
+        <ul className="list-disc list-inside text-white/90 space-y-1 leading-relaxed">
+          <li>{t('pricing.copyrightPortfolio')}</li>
+          <li>{t('pricing.copyrightTransfer')}</li>
+          <li>{t('pricing.copyrightCredit')}</li>
+        </ul>
+      </div>
+
+      <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg shadow border border-white/10">
+        <h3 className="text-xl font-semibold mb-2 text-white">{t('pricing.supportTitle')}</h3>
+        <ul className="list-disc list-inside text-white/90 space-y-1 leading-relaxed">
+          <li>{t('pricing.supportFree')}</li>
+          <li>{t('pricing.supportPaid')}</li>
+        </ul>
+      </div>
+
+      <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg shadow border border-white/10">
+        <h3 className="text-xl font-semibold mb-2 text-white">{t('pricing.ownershipTitle')}</h3>
+        <ul className="list-disc list-inside text-white/90 space-y-1 leading-relaxed">
+          <li>{t('pricing.ownershipFull')}</li>
+          <li>{t('pricing.ownershipResale')}</li>
+          <li>{t('pricing.ownershipPricing')}</li>
+        </ul>
+      </div>
+
+      <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg shadow border border-white/10">
+        <h3 className="text-xl font-semibold mb-2 text-white">{t('pricing.paymentTitle')}</h3>
+        <ul className="list-disc list-inside text-white/90 space-y-1 leading-relaxed">
+          <li>{t('pricing.paymentAdvance')}</li>
+          <li>{t('pricing.paymentHourly')}</li>
+          <li>{t('pricing.paymentMaintenance')}</li>
+        </ul>
       </div>
     </div>
   </div>
