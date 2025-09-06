@@ -7,18 +7,23 @@ const LanguageContext = createContext(null);
 
 export function LanguageProvider({ children }) {
   const [locale, setLocale] = useState("fa");
+  const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
+    setIsHydrated(true);
     if (typeof window === "undefined") return;
     const saved = localStorage.getItem("locale");
-    if (saved && saved !== locale) {
+    if (saved && (saved === "fa" || saved === "en")) {
       setLocale(saved);
-      return; // will run again with updated locale
     }
+  }, []);
+
+  useEffect(() => {
+    if (!isHydrated || typeof window === "undefined") return;
     localStorage.setItem("locale", locale);
     document.documentElement.lang = locale === "fa" ? "fa" : "en";
     document.documentElement.dir = locale === "fa" ? "rtl" : "ltr";
-  }, [locale]);
+  }, [locale, isHydrated]);
 
   const t = useMemo(() => {
     const dict = dictionary[locale] || dictionary.fa;
