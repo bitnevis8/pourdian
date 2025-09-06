@@ -2,7 +2,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
-import { MdWork, MdSchool, MdLanguage, MdDownload, MdMenu, MdClose } from 'react-icons/md';
+import { MdWork, MdSchool, MdLanguage, MdMenu, MdClose } from 'react-icons/md';
 import { BsPerson } from 'react-icons/bs';
 import {
   AboutContent,
@@ -184,18 +184,6 @@ const Sidebar = () => {
           ))}
         </nav>
 
-        <div className="mt-4 relative z-10">
-          <a 
-            href="/resume.pdf" 
-            download
-            className="block w-full text-center p-2 rounded-lg text-white bg-gradient-to-r from-green-600/80 to-green-500/80 hover:from-green-500 hover:to-green-400 transition-all duration-300 shadow-lg shadow-green-500/20"
-          >
-            <span className="inline-flex items-center gap-2 justify-center">
-              <MdDownload />
-              <span>{t('nav.downloadResume')}</span>
-            </span>
-          </a>
-        </div>
 
         <div className="mt-4 flex justify-center space-x-4 relative z-10">
           {socialLinks.map((link, index) => (
