@@ -287,6 +287,8 @@ export const PricingTermsContent = () => {
           <li>{t('pricing.paymentMaintenance')}</li>
         </ul>
       </div>
+
+
     </div>
   </div>
 );
