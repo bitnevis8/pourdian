@@ -107,8 +107,8 @@ const Sidebar = () => {
         effect="net"
         color={0x34e3d8}
         options={{ 
-          maxDistance: typeof window !== 'undefined' && window.innerWidth < 768 ? 5.0 : 22.0, 
-          spacing: typeof window !== 'undefined' && window.innerWidth < 768 ? 6 : 13.0, 
+          maxDistance: typeof window !== 'undefined' && window.innerWidth < 768 ? 8.0 : 22.0, 
+          spacing: typeof window !== 'undefined' && window.innerWidth < 768 ? 8 : 13.0, 
           showDots: false, 
           scaleMobile: 1,
           mouseControls: true, 
