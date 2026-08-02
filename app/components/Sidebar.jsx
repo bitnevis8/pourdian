@@ -10,7 +10,6 @@ import {
   PortfolioContent,
   CertificationsContent,
   LanguagesContent,
-  PricingTermsContent,
 } from './SidebarContent';
 import { useLanguage } from '../context/LanguageContext';
 import dynamic from 'next/dynamic';
@@ -49,7 +48,6 @@ const Sidebar = () => {
     { id: 'portfolio', icon: <MdWork />, title: t('nav.portfolio') },
     { id: 'certifications', icon: <MdSchool />, title: t('nav.certifications') },
     { id: 'languages', icon: <MdLanguage />, title: t('nav.languages') },
-    { id: 'pricing', icon: <MdWork />, title: t('nav.pricing') },
   ];
 
   const socialLinks = [
@@ -94,8 +92,6 @@ const Sidebar = () => {
         return <CertificationsContent />;
       case 'languages':
         return <LanguagesContent />;
-      case 'pricing':
-        return <PricingTermsContent />;
       default:
         return <AboutContent />;
     }
