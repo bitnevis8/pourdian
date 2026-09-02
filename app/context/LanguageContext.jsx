@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { dictionary } from "../i18n/dictionary";
+import { dictionary, localeMeta, locales } from "../i18n/dictionary";
 
 const LanguageContext = createContext(null);
 
@@ -13,16 +13,17 @@ export function LanguageProvider({ children }) {
     setIsHydrated(true);
     if (typeof window === "undefined") return;
     const saved = localStorage.getItem("locale");
-    if (saved && (saved === "fa" || saved === "en")) {
+    if (saved && locales.includes(saved)) {
       setLocale(saved);
     }
   }, []);
 
   useEffect(() => {
     if (!isHydrated || typeof window === "undefined") return;
+    const meta = localeMeta[locale] || localeMeta.fa;
     localStorage.setItem("locale", locale);
-    document.documentElement.lang = locale === "fa" ? "fa" : "en";
-    document.documentElement.dir = locale === "fa" ? "rtl" : "ltr";
+    document.documentElement.lang = meta.lang;
+    document.documentElement.dir = meta.dir;
   }, [locale, isHydrated]);
 
   const t = useMemo(() => {
@@ -33,7 +34,12 @@ export function LanguageProvider({ children }) {
     };
   }, [locale]);
 
-  const value = useMemo(() => ({ locale, setLocale, t }), [locale, t]);
+  const isRtl = (localeMeta[locale] || localeMeta.fa).dir === "rtl";
+
+  const value = useMemo(
+    () => ({ locale, setLocale, t, isRtl, locales, localeMeta }),
+    [locale, t, isRtl]
+  );
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
@@ -43,5 +49,3 @@ export function useLanguage() {
   if (!ctx) throw new Error("useLanguage must be used within LanguageProvider");
   return ctx;
 }
-
-

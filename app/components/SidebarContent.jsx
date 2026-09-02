@@ -8,8 +8,8 @@ import VantaBadge from './VantaBadge';
 import ProjectCard from './ProjectCard';
 
 export const AboutContent = () => {
-  const { t, locale } = useLanguage();
-  const alignH2 = locale === 'fa' ? 'md:text-right' : 'md:text-left';
+  const { t, isRtl } = useLanguage();
+  const alignH2 = isRtl ? 'md:text-right' : 'md:text-left';
   return (
     <div className="space-y-6">
       <h2 className={`text-3xl font-bold mb-4 text-center ${alignH2} text-white`}>{t('about.title')}</h2>
@@ -71,8 +71,8 @@ export const AboutContent = () => {
 };
 
 export const ResumeContent = () => {
-  const { t, locale } = useLanguage();
-  const alignH2 = locale === 'fa' ? 'md:text-right' : 'md:text-left';
+  const { t, isRtl } = useLanguage();
+  const alignH2 = isRtl ? 'md:text-right' : 'md:text-left';
   return (
   <div className="space-y-6">
     <h2 className={`text-3xl font-bold mb-4 text-center ${alignH2} text-white`}>{t('resume.title')}</h2>
@@ -113,8 +113,8 @@ export const ResumeContent = () => {
 };
 
 export const PortfolioContent = () => {
-  const { t, locale } = useLanguage();
-  const alignH2 = locale === 'fa' ? 'md:text-right' : 'md:text-left';
+  const { t, isRtl } = useLanguage();
+  const alignH2 = isRtl ? 'md:text-right' : 'md:text-left';
   return (
     <div className="space-y-6">
       <h2 className={`text-3xl font-bold mb-4 text-center ${alignH2} text-white`}>{t('portfolio.title')}</h2>
@@ -169,8 +169,8 @@ export const PortfolioContent = () => {
 };
 
 export const CertificationsContent = () => {
-  const { t, locale } = useLanguage();
-  const alignH2 = locale === 'fa' ? 'md:text-right' : 'md:text-left';
+  const { t, isRtl } = useLanguage();
+  const alignH2 = isRtl ? 'md:text-right' : 'md:text-left';
   return (
   <div className="space-y-6">
     <h2 className={`text-3xl font-bold mb-4 text-center ${alignH2} text-white`}>{t('certifications.title')}</h2>
@@ -193,18 +193,38 @@ export const CertificationsContent = () => {
 };
 
 export const LanguagesContent = () => {
-  const { t, locale } = useLanguage();
-  const alignH2 = locale === 'fa' ? 'md:text-right' : 'md:text-left';
+  const { t, isRtl, locale, setLocale, locales, localeMeta } = useLanguage();
+  const alignH2 = isRtl ? 'md:text-right' : 'md:text-left';
   return (
   <div className="space-y-6">
     <h2 className={`text-3xl font-bold mb-4 text-center ${alignH2} text-white`}>{t('languages.title')}</h2>
-    <div className="space-y-4">
-      <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg shadow border border-white/10">
-        <h3 className="text-xl font-semibold text-white">{t('languages.fa')}</h3>
+
+    <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg shadow border border-white/10">
+      <h3 className="text-lg font-semibold mb-3 text-white">{t('languages.choose')}</h3>
+      <div className="grid grid-cols-2 gap-2">
+        {locales.map((code) => (
+          <button
+            key={code}
+            type="button"
+            onClick={() => setLocale(code)}
+            className={`rounded-lg px-3 py-3 text-sm font-medium transition-all ${
+              locale === code
+                ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
+                : 'bg-white/10 text-white/90 hover:bg-white/20'
+            }`}
+          >
+            {localeMeta[code].label}
+          </button>
+        ))}
       </div>
-      <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg shadow border border-white/10">
-        <h3 className="text-xl font-semibold text-white">{t('languages.en')}</h3>
-      </div>
+    </div>
+
+    <div className="space-y-3">
+      {['fa', 'en', 'ar', 'ru'].map((code) => (
+        <div key={code} className="bg-white/10 backdrop-blur-sm p-4 rounded-lg shadow border border-white/10">
+          <h3 className="text-xl font-semibold text-white">{t(`languages.${code}`)}</h3>
+        </div>
+      ))}
     </div>
   </div>
 );

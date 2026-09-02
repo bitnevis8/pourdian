@@ -1,8 +1,8 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
-import { MdWork, MdSchool, MdLanguage, MdMenu, MdClose } from 'react-icons/md';
+import { FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { MdWork, MdSchool, MdLanguage, MdFolder } from 'react-icons/md';
 import { BsPerson } from 'react-icons/bs';
 import {
   AboutContent,
@@ -18,9 +18,9 @@ const VantaBackground = dynamic(() => import('./VantaBackground'), { ssr: false 
 
 const Sidebar = () => {
   const [activeSection, setActiveSection] = useState('about');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { t, locale, setLocale } = useLanguage();
+  const { t, locale, setLocale, locales, localeMeta } = useLanguage();
   const clickAudioRef = useRef(null);
+  const contentRef = useRef(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -31,6 +31,10 @@ const Sidebar = () => {
       clickAudioRef.current = audio;
     }
   }, []);
+
+  useEffect(() => {
+    contentRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [activeSection]);
 
   const playClick = () => {
     try {
@@ -45,45 +49,33 @@ const Sidebar = () => {
   const sections = [
     { id: 'about', icon: <BsPerson />, title: t('nav.about') },
     { id: 'resume', icon: <MdWork />, title: t('nav.resume') },
-    { id: 'portfolio', icon: <MdWork />, title: t('nav.portfolio') },
+    { id: 'portfolio', icon: <MdFolder />, title: t('nav.portfolio') },
     { id: 'certifications', icon: <MdSchool />, title: t('nav.certifications') },
     { id: 'languages', icon: <MdLanguage />, title: t('nav.languages') },
   ];
 
   const socialLinks = [
-    { 
-      icon: <FaLinkedin />, 
-      url: 'https://www.linkedin.com/in/hossein-pourdian-b790411a8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', 
-      label: 'LinkedIn' 
+    {
+      icon: <FaLinkedin />,
+      url: 'https://www.linkedin.com/in/hossein-pourdian-b790411a8?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+      label: 'LinkedIn',
     },
-    { 
-      icon: <FaEnvelope />, 
-      url: 'mailto:hpourdian@gmail.com', 
-      label: 'Email' 
-    }
+    {
+      icon: <FaEnvelope />,
+      url: 'mailto:hpourdian@gmail.com',
+      label: 'Email',
+    },
   ];
+
+  const goTo = (id) => {
+    playClick();
+    setActiveSection(id);
+  };
 
   const renderContent = () => {
     switch (activeSection) {
       case 'about':
-        return (
-          <div className="space-y-6 z-50">
-            <div className="md:hidden flex flex-col items-center mb-8">
-              <div className="relative w-32 h-32 mb-4 rounded-full overflow-hidden border-4 border-blue-400 shadow-lg shadow-blue-500/20">
-                <Image
-                  src="/profile.jpg"
-                  alt="Profile Picture"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-              <h1 className="text-2xl font-bold mb-2 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-200">Hossein Pourdian</h1>
-              <p className="text-gray-300 text-sm text-center">Full Stack Developer</p>
-            </div>
-            <AboutContent />
-          </div>
-        );
+        return <AboutContent />;
       case 'resume':
         return <ResumeContent />;
       case 'portfolio':
@@ -97,128 +89,170 @@ const Sidebar = () => {
     }
   };
 
+  const LanguageChips = ({ className = '' }) => (
+    <div className={`flex flex-wrap justify-center gap-1.5 ${className}`}>
+      {locales.map((code) => (
+        <button
+          key={code}
+          type="button"
+          onClick={() => {
+            playClick();
+            setLocale(code);
+          }}
+          className={`min-w-[2.75rem] rounded-md px-2 py-1 text-xs font-medium transition-all ${
+            locale === code
+              ? 'bg-blue-600 text-white shadow shadow-blue-500/30'
+              : 'bg-white/10 text-white/85 hover:bg-white/20'
+          }`}
+          title={localeMeta[code].label}
+        >
+          {code.toUpperCase()}
+        </button>
+      ))}
+    </div>
+  );
+
+  const ProfileBlock = ({ compact = false }) => (
+    <div className={`flex flex-col items-center ${compact ? 'gap-2' : 'mb-4 gap-3'}`}>
+      <div
+        className={`relative rounded-full overflow-hidden border-4 border-blue-400 shadow-lg shadow-blue-500/20 ${
+          compact ? 'h-16 w-16' : 'h-28 w-28 md:h-32 md:w-32'
+        }`}
+      >
+        <Image src="/profile.jpg" alt="Profile Picture" fill className="object-cover" priority />
+      </div>
+      <div className="text-center">
+        <h1
+          className={`font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-200 ${
+            compact ? 'text-lg' : 'text-xl md:text-2xl'
+          }`}
+        >
+          Hossein Pourdian
+        </h1>
+        <p className={`text-gray-300 ${compact ? 'text-xs' : 'text-sm'}`}>{t('role')}</p>
+      </div>
+    </div>
+  );
+
+  const NavButtons = ({ vertical = false }) =>
+    sections.map((section) => (
+      <button
+        key={section.id}
+        type="button"
+        onClick={() => goTo(section.id)}
+        className={
+          vertical
+            ? `relative overflow-hidden w-full p-2.5 rounded-lg mb-2 transition-all duration-300 select-none ${
+                activeSection === section.id
+                  ? 'bg-blue-900/60 text-white shadow-lg shadow-blue-500/20'
+                  : 'text-white/90 hover:text-white hover:bg-blue-800/30'
+              }`
+            : `flex flex-1 flex-col items-center justify-center gap-0.5 py-2 px-1 min-w-0 transition-all ${
+                activeSection === section.id
+                  ? 'text-cyan-300'
+                  : 'text-white/65 active:text-white'
+              }`
+        }
+      >
+        <span className={vertical ? 'text-xl' : 'text-xl leading-none'}>{section.icon}</span>
+        <span className={vertical ? '' : 'text-[10px] leading-tight truncate max-w-full'}>
+          {section.title}
+        </span>
+      </button>
+    ));
+
   return (
-    <div className="relative flex flex-col md:flex-row h-screen">
+    <div className="relative flex h-[100dvh] flex-col md:flex-row overflow-hidden">
       <VantaBackground
         effect="net"
         color={0x34e3d8}
-        options={{ 
-          maxDistance: typeof window !== 'undefined' && window.innerWidth < 768 ? 8.0 : 22.0, 
-          spacing: typeof window !== 'undefined' && window.innerWidth < 768 ? 8 : 13.0, 
-          showDots: false, 
+        options={{
+          maxDistance: typeof window !== 'undefined' && window.innerWidth < 768 ? 8.0 : 22.0,
+          spacing: typeof window !== 'undefined' && window.innerWidth < 768 ? 8 : 13.0,
+          showDots: false,
           scaleMobile: 1,
-          mouseControls: true, 
-          touchControls: true, 
-          gyroControls: false 
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
         }}
       />
-      {/* Mobile Menu Button */}
-      <button
-        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-        className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-white/20 backdrop-blur-sm text-gray-800 shadow-lg hover:bg-white/30 transition-all duration-300"
-      >
-        {isSidebarOpen ? <MdClose size={24} /> : <MdMenu size={24} />}
-      </button>
 
-      {/* Sidebar */}
-      <div className={`fixed md:static inset-y-0 left-0 w-64 bg-gradient-to-br from-blue-900/30 via-gray-800/20 to-gray-900/30 backdrop-blur-md text-white p-4 flex flex-col transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 z-40`}>
-        <div className="flex flex-col items-center mb-4 relative z-10 pt-12 md:pt-0">
-          <div className="relative w-32 h-32 mb-4 rounded-full overflow-hidden border-4 border-blue-400 shadow-lg shadow-blue-500/20">
-            <Image
-              src="/profile.jpg"
-              alt="Profile Picture"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
-          <h1 className="text-2xl font-bold mb-2 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-200">Hossein Pourdian</h1>
-          <p className="text-gray-300 text-sm text-center">Full Stack Developer</p>
-        </div>
-
-        {/* Language Switcher - Mobile Top */}
-        <div className="md:hidden flex justify-center gap-2 mb-6 relative z-10">
-          <button
-            onClick={() => {
-              playClick();
-              setLocale('fa');
-            }}
-            className={`px-3 py-1 rounded text-sm ${locale === 'fa' ? 'bg-blue-600 text-white' : 'bg-white/10'}`}
-            title="فارسی"
-          >{t('nav.switchToFA')}</button>
-          <button
-            onClick={() => {
-              playClick();
-              setLocale('en');
-            }}
-            className={`px-3 py-1 rounded text-sm ${locale === 'en' ? 'bg-blue-600 text-white' : 'bg-white/10'}`}
-            title="English"
-          >{t('nav.switchToEN')}</button>
-        </div>
-
-        <nav className="flex-1 relative z-10">
-          {sections.map((section) => (
-            <button
-              key={section.id}
-              onClick={() => {
-                playClick();
-                setActiveSection(section.id);
-                setIsSidebarOpen(false);
-              }}
-              className={`relative overflow-hidden w-full p-2 rounded-lg mb-2 transition-all duration-300 select-none ${
-                activeSection === section.id
-                  ? 'bg-blue-900/60 text-white shadow-lg shadow-blue-500/20 hover:bg-blue-900/70'
-                  : 'text-white/90 hover:text-white hover:bg-blue-800/30 hover:backdrop-blur-md hover:shadow hover:shadow-white/10'
-              }`}
-            >
-              
-              <div className="relative z-10 flex items-center gap-2 w-full">
-                <span className="text-xl">{section.icon}</span>
-                <span>{section.title}</span>
-              </div>
-            </button>
-          ))}
-        </nav>
-
-
-        <div className="mt-4 flex justify-center space-x-4 relative z-10">
+      {/* Desktop sidebar */}
+      <aside className="relative z-40 hidden md:flex w-64 shrink-0 flex-col bg-gradient-to-br from-blue-900/30 via-gray-800/20 to-gray-900/30 backdrop-blur-md text-white p-4">
+        <ProfileBlock />
+        <LanguageChips className="mb-4" />
+        <nav className="flex-1 relative z-10">{NavButtons({ vertical: true })}</nav>
+        <div className="mt-4 flex justify-center gap-3 relative z-10">
           {socialLinks.map((link, index) => (
             <a
               key={index}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-2xl hover:text-blue-400 transition-all duration-300 hover:scale-110 px-2 py-1 rounded-lg bg-white/5 hover:bg-white/10 backdrop-blur-[2px] hover:backdrop-blur-sm"
+              className="text-2xl hover:text-blue-400 transition-all duration-300 hover:scale-110 px-2 py-1 rounded-lg bg-white/5 hover:bg-white/10"
               title={link.label}
             >
               {link.icon}
             </a>
           ))}
         </div>
+      </aside>
 
-        {/* Language Switcher - Desktop Bottom */}
-        <div className="hidden md:flex mt-4 justify-center gap-2 relative z-10">
-          <button
-            onClick={() => setLocale('fa')}
-            className={`px-3 py-1 rounded ${locale === 'fa' ? 'bg-blue-600 text-white' : 'bg-white/10'}`}
-            title="فارسی"
-          >{t('nav.switchToFA')}</button>
-          <button
-            onClick={() => setLocale('en')}
-            className={`px-3 py-1 rounded ${locale === 'en' ? 'bg-blue-600 text-white' : 'bg-white/10'}`}
-            title="English"
-          >{t('nav.switchToEN')}</button>
-        </div>
-      </div>
+      {/* Main column */}
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-hidden">
+        {/* Mobile top bar */}
+        <header className="md:hidden shrink-0 border-b border-white/10 bg-gradient-to-br from-blue-900/40 via-gray-900/30 to-gray-950/40 backdrop-blur-md px-3 pt-[max(0.5rem,env(safe-area-inset-top))] pb-3">
+          <div className="flex items-center gap-3">
+            <div className="relative h-12 w-12 shrink-0 rounded-full overflow-hidden border-2 border-blue-400/80">
+              <Image src="/profile.jpg" alt="Profile" fill className="object-cover" priority />
+            </div>
+            <div className="min-w-0 flex-1">
+              <h1 className="truncate text-base font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-200">
+                Hossein Pourdian
+              </h1>
+              <p className="truncate text-xs text-white/70">{t('role')}</p>
+            </div>
+            <div className="flex shrink-0 gap-1.5">
+              {socialLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-lg bg-white/10 p-2 text-base text-white/90"
+                  title={link.label}
+                >
+                  {link.icon}
+                </a>
+              ))}
+            </div>
+          </div>
+          <LanguageChips className="mt-2.5" />
+        </header>
 
-      {/* Content Area */}
-      <div className="relative flex-1 overflow-hidden">
-        <div className="relative p-4 md:p-8 overflow-y-auto h-full text-white bg-gradient-to-br from-blue-900/30 via-gray-800/20 to-gray-900/30">
+        {/* Content */}
+        <div
+          ref={contentRef}
+          className="relative min-h-0 flex-1 overflow-y-auto overscroll-contain text-white bg-gradient-to-br from-blue-900/25 via-gray-800/15 to-gray-900/25 px-3 py-4 pb-[calc(4.75rem+env(safe-area-inset-bottom))] md:p-8 md:pb-8"
+        >
+          {activeSection === 'about' && (
+            <div className="md:hidden mb-5">
+              <ProfileBlock compact />
+            </div>
+          )}
           {renderContent()}
         </div>
+
+        {/* Mobile bottom bar */}
+        <nav
+          className="md:hidden fixed inset-x-0 bottom-0 z-50 border-t border-white/15 bg-gray-950/85 backdrop-blur-xl"
+          style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+        >
+          <div className="mx-auto flex max-w-lg items-stretch">{NavButtons({ vertical: false })}</div>
+        </nav>
       </div>
     </div>
   );
 };
 
-export default Sidebar; 
+export default Sidebar;
