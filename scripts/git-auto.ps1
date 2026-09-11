@@ -1,4 +1,4 @@
-# git auto — add, commit with "10 <message>", push origin main
+# git auto - add, commit with "10 <message>", push origin main
 $ErrorActionPreference = "Stop"
 
 function Get-ChangeSummary {
@@ -34,10 +34,13 @@ function Get-ChangeSummary {
   return "update $($names.Count) files"
 }
 
-if (-not (Test-Path (Join-Path (Get-Location) ".git"))) {
-  Write-Host "Not inside a git repository root." -ForegroundColor Red
+$repoRoot = (git rev-parse --show-toplevel 2>$null)
+if (-not $repoRoot) {
+  Write-Host "Not inside a git repository." -ForegroundColor Red
   exit 1
 }
+
+Set-Location $repoRoot
 
 Write-Host "> git add ." -ForegroundColor Cyan
 git add .
@@ -45,10 +48,11 @@ git add .
 $staged = @(git diff --cached --name-only 2>$null | Where-Object { $_ })
 if (-not $staged -or $staged.Count -eq 0) {
   Write-Host "Nothing to commit. Pushing current branch..." -ForegroundColor Yellow
-} else {
+}
+else {
   $summary = Get-ChangeSummary
   $message = "10 $summary"
-  Write-Host "> git commit -m `"$message`"" -ForegroundColor Cyan
+  Write-Host ("> git commit -m `"{0}`"" -f $message) -ForegroundColor Cyan
   git commit -m $message
   if ($LASTEXITCODE -ne 0) {
     Write-Host "Commit failed." -ForegroundColor Red

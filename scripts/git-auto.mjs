@@ -29,8 +29,17 @@ function summarizeChanges() {
   const joined = names.join(" ").toLowerCase();
   const parts = [];
 
-  if (joined.includes("sidebar") || joined.includes("dictionary") || joined.includes("language")) {
-    parts.push("fix sidebar menu layout and widen navigation");
+  if (joined.includes("sidebar") || joined.includes("dictionary") || joined.includes("language") || joined.includes("i18n")) {
+    parts.push("improve sidebar and multilingual UI");
+  }
+  if (
+    joined.includes("portfolio") ||
+    joined.includes("crm") ||
+    joined.includes("taganeh") ||
+    joined.includes("cal-afg") ||
+    joined.includes("car-afg")
+  ) {
+    parts.push("refresh portfolio projects and covers");
   }
   if (joined.includes("git-auto") || joined.includes("package.json")) {
     parts.push("add git auto helper");
