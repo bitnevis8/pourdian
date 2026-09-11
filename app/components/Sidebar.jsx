@@ -47,11 +47,11 @@ const Sidebar = () => {
   };
 
   const sections = [
-    { id: 'about', icon: <BsPerson />, title: t('nav.about') },
-    { id: 'resume', icon: <MdWork />, title: t('nav.resume') },
-    { id: 'portfolio', icon: <MdFolder />, title: t('nav.portfolio') },
-    { id: 'certifications', icon: <MdSchool />, title: t('nav.certifications') },
-    { id: 'languages', icon: <MdLanguage />, title: t('nav.languages') },
+    { id: 'about', icon: <BsPerson />, titleKey: 'about' },
+    { id: 'resume', icon: <MdWork />, titleKey: 'resume' },
+    { id: 'portfolio', icon: <MdFolder />, titleKey: 'portfolio' },
+    { id: 'certifications', icon: <MdSchool />, titleKey: 'certifications' },
+    { id: 'languages', icon: <MdLanguage />, titleKey: 'languages' },
   ];
 
   const socialLinks = [
@@ -99,7 +99,7 @@ const Sidebar = () => {
             playClick();
             setLocale(code);
           }}
-          className={`min-w-[2.75rem] rounded-md px-2 py-1 text-xs font-medium transition-all ${
+          className={`min-w-[2.75rem] rounded-md px-2.5 py-1.5 text-xs font-medium transition-all ${
             locale === code
               ? 'bg-blue-600 text-white shadow shadow-blue-500/30'
               : 'bg-white/10 text-white/85 hover:bg-white/20'
@@ -113,18 +113,18 @@ const Sidebar = () => {
   );
 
   const ProfileBlock = ({ compact = false }) => (
-    <div className={`flex flex-col items-center ${compact ? 'gap-2' : 'mb-4 gap-3'}`}>
+    <div className={`flex flex-col items-center ${compact ? 'gap-2' : 'mb-5 gap-3'}`}>
       <div
         className={`relative rounded-full overflow-hidden border-4 border-blue-400 shadow-lg shadow-blue-500/20 ${
-          compact ? 'h-16 w-16' : 'h-28 w-28 md:h-32 md:w-32'
+          compact ? 'h-16 w-16' : 'h-28 w-28 lg:h-32 lg:w-32'
         }`}
       >
         <Image src="/profile.jpg" alt="Profile Picture" fill className="object-cover" priority />
       </div>
-      <div className="text-center">
+      <div className="text-center px-1">
         <h1
           className={`font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-200 ${
-            compact ? 'text-lg' : 'text-xl md:text-2xl'
+            compact ? 'text-lg' : 'text-xl lg:text-2xl'
           }`}
         >
           Hossein Pourdian
@@ -133,33 +133,6 @@ const Sidebar = () => {
       </div>
     </div>
   );
-
-  const NavButtons = ({ vertical = false }) =>
-    sections.map((section) => (
-      <button
-        key={section.id}
-        type="button"
-        onClick={() => goTo(section.id)}
-        className={
-          vertical
-            ? `relative overflow-hidden w-full p-2.5 rounded-lg mb-2 transition-all duration-300 select-none ${
-                activeSection === section.id
-                  ? 'bg-blue-900/60 text-white shadow-lg shadow-blue-500/20'
-                  : 'text-white/90 hover:text-white hover:bg-blue-800/30'
-              }`
-            : `flex flex-1 flex-col items-center justify-center gap-0.5 py-2 px-1 min-w-0 transition-all ${
-                activeSection === section.id
-                  ? 'text-cyan-300'
-                  : 'text-white/65 active:text-white'
-              }`
-        }
-      >
-        <span className={vertical ? 'text-xl' : 'text-xl leading-none'}>{section.icon}</span>
-        <span className={vertical ? '' : 'text-[10px] leading-tight truncate max-w-full'}>
-          {section.title}
-        </span>
-      </button>
-    ));
 
   return (
     <div className="relative flex h-[100dvh] flex-col md:flex-row overflow-hidden">
@@ -177,19 +150,42 @@ const Sidebar = () => {
         }}
       />
 
-      {/* Desktop sidebar */}
-      <aside className="relative z-40 hidden md:flex w-64 shrink-0 flex-col bg-gradient-to-br from-blue-900/30 via-gray-800/20 to-gray-900/30 backdrop-blur-md text-white p-4">
+      {/* Desktop / tablet sidebar — wider, single-line menu rows */}
+      <aside className="relative z-40 hidden md:flex w-72 lg:w-80 shrink-0 flex-col bg-gradient-to-br from-blue-900/30 via-gray-800/20 to-gray-900/30 backdrop-blur-md text-white p-5">
         <ProfileBlock />
-        <LanguageChips className="mb-4" />
-        <nav className="flex-1 relative z-10">{NavButtons({ vertical: true })}</nav>
-        <div className="mt-4 flex justify-center gap-3 relative z-10">
+        <LanguageChips className="mb-5" />
+        <nav className="relative z-10 flex flex-1 flex-col gap-1.5">
+          {sections.map((section) => {
+            const active = activeSection === section.id;
+            return (
+              <button
+                key={section.id}
+                type="button"
+                onClick={() => goTo(section.id)}
+                className={`flex w-full items-center gap-3 rounded-xl px-3.5 py-3 text-start transition-all duration-200 select-none ${
+                  active
+                    ? 'bg-blue-900/60 text-white shadow-lg shadow-blue-500/20'
+                    : 'text-white/90 hover:bg-blue-800/30 hover:text-white'
+                }`}
+              >
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center text-xl leading-none">
+                  {section.icon}
+                </span>
+                <span className="min-w-0 flex-1 truncate text-sm font-medium leading-none lg:text-[0.95rem]">
+                  {t(`nav.${section.titleKey}`)}
+                </span>
+              </button>
+            );
+          })}
+        </nav>
+        <div className="relative z-10 mt-4 flex justify-center gap-3">
           {socialLinks.map((link, index) => (
             <a
               key={index}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-2xl hover:text-blue-400 transition-all duration-300 hover:scale-110 px-2 py-1 rounded-lg bg-white/5 hover:bg-white/10"
+              className="rounded-lg bg-white/5 px-2 py-1 text-2xl transition-all duration-300 hover:scale-110 hover:bg-white/10 hover:text-blue-400"
               title={link.label}
             >
               {link.icon}
@@ -203,7 +199,7 @@ const Sidebar = () => {
         {/* Mobile top bar */}
         <header className="md:hidden shrink-0 border-b border-white/10 bg-gradient-to-br from-blue-900/40 via-gray-900/30 to-gray-950/40 backdrop-blur-md px-3 pt-[max(0.5rem,env(safe-area-inset-top))] pb-3">
           <div className="flex items-center gap-3">
-            <div className="relative h-12 w-12 shrink-0 rounded-full overflow-hidden border-2 border-blue-400/80">
+            <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-blue-400/80">
               <Image src="/profile.jpg" alt="Profile" fill className="object-cover" priority />
             </div>
             <div className="min-w-0 flex-1">
@@ -236,19 +232,40 @@ const Sidebar = () => {
           className="relative min-h-0 flex-1 overflow-y-auto overscroll-contain text-white bg-gradient-to-br from-blue-900/25 via-gray-800/15 to-gray-900/25 px-3 py-4 pb-[calc(4.75rem+env(safe-area-inset-bottom))] md:p-8 md:pb-8"
         >
           {activeSection === 'about' && (
-            <div className="md:hidden mb-5">
+            <div className="mb-5 md:hidden">
               <ProfileBlock compact />
             </div>
           )}
           {renderContent()}
         </div>
 
-        {/* Mobile bottom bar */}
+        {/* Mobile bottom bar — compact icon + short label */}
         <nav
-          className="md:hidden fixed inset-x-0 bottom-0 z-50 border-t border-white/15 bg-gray-950/85 backdrop-blur-xl"
+          className="fixed inset-x-0 bottom-0 z-50 border-t border-white/15 bg-gray-950/85 backdrop-blur-xl md:hidden"
           style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
         >
-          <div className="mx-auto flex max-w-lg items-stretch">{NavButtons({ vertical: false })}</div>
+          <div className="mx-auto flex max-w-lg items-stretch">
+            {sections.map((section) => {
+              const active = activeSection === section.id;
+              return (
+                <button
+                  key={section.id}
+                  type="button"
+                  onClick={() => goTo(section.id)}
+                  className={`flex min-w-0 flex-1 flex-col items-center justify-center gap-1 px-1 py-2.5 transition-all ${
+                    active ? 'text-cyan-300' : 'text-white/65 active:text-white'
+                  }`}
+                >
+                  <span className="flex h-5 w-5 items-center justify-center text-xl leading-none">
+                    {section.icon}
+                  </span>
+                  <span className="max-w-full truncate text-[10px] leading-none">
+                    {t(`nav.${section.titleKey}Short`)}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </nav>
       </div>
     </div>

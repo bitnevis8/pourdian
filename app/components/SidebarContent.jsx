@@ -115,54 +115,49 @@ export const ResumeContent = () => {
 export const PortfolioContent = () => {
   const { t, isRtl } = useLanguage();
   const alignH2 = isRtl ? 'md:text-right' : 'md:text-left';
+  const projects = [
+    {
+      key: 'crm',
+      imageSrc: '/crm-pourdian.png',
+      href: 'https://crm.pourdian.com',
+      chips: ['Next.js', 'CRM', 'Dashboard', 'Inventory'],
+    },
+    {
+      key: 'cal',
+      imageSrc: '/cal-afg.png',
+      href: 'https://cal.afg-insp.ir',
+      chips: ['Next.js', 'Calculator', 'Pricing', 'Reports'],
+    },
+    {
+      key: 'car',
+      imageSrc: '/car-afg.png',
+      href: 'https://car.afg-insp.ir',
+      chips: ['Automation', 'Inspection', 'PWA', 'Workflow'],
+    },
+    {
+      key: 'taganeh',
+      imageSrc: '/taganeh.png',
+      href: 'https://taganeh.com',
+      chips: ['Search', 'News', 'Aggregation', 'SEO'],
+    },
+  ];
+
   return (
     <div className="space-y-6">
       <h2 className={`text-3xl font-bold mb-4 text-center ${alignH2} text-white`}>{t('portfolio.title')}</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <ProjectCard
-          imageSrc="/arya-foulad.jpg"
-          imageAlt="Arya Foulad Qarn CMS"
-          title={<span>Arya Foulad Qarn CMS <span className="text-sm font-normal text-green-300">({t('portfolio.inProgress')})</span></span>}
-          description={t('portfolio.aryaDesc')}
-          chips={['Node.js', 'Express.js', 'React', 'Next.js', 'Tailwind CSS', 'MySQL']}
-          href="https://aryafoulad.pourdian.com"
-          visitLabel={t('portfolio.visit')}
-          vantaEffect="fog"
-          vantaOptions={{ highlightColor: 0x22d3ee, midtoneColor: 0x0284c7, lowlightColor: 0x0ea5e9, baseColor: 0x0b1220 }}
-        />
-        <ProjectCard
-          imageSrc="/nc.png"
-          imageAlt="NC Clinic"
-          title={t('portfolio.lcTitle')}
-          description={t('portfolio.lcDesc')}
-          chips={['Next.js', 'Tailwind CSS', 'Responsive', 'SEO']}
-          href="https://lc.pourdian.com/"
-          visitLabel={t('portfolio.visit')}
-          vantaEffect="fog"
-          vantaOptions={{ highlightColor: 0x93c5fd, midtoneColor: 0x3b82f6, lowlightColor: 0x1e3a8a, baseColor: 0x0b1220 }}
-        />
-        <ProjectCard
-          imageSrc="/geokhuz.png"
-          imageAlt="Geokhuz Website"
-          title={t('portfolio.geokhuzTitle')}
-          description={t('portfolio.geokhuzDesc')}
-          chips={['Next.js', 'Tailwind CSS', 'SEO', 'Responsive']}
-          href="https://geokhuz.pourdian.com/"
-          visitLabel={t('portfolio.visit')}
-          vantaEffect="fog"
-          vantaOptions={{ highlightColor: 0x93c5fd, midtoneColor: 0x3b82f6, lowlightColor: 0x1e3a8a, baseColor: 0x0b1220 }}
-        />
-        <ProjectCard
-          imageSrc="/mapdraft.png"
-          imageAlt="MapDraft"
-          title={t('portfolio.utmplusTitle')}
-          description={t('portfolio.utmplusDesc')}
-          chips={['Next.js', 'Tailwind CSS', 'Forms', 'UX']}
-          href="https://utmplus.pourdian.com/"
-          visitLabel={t('portfolio.visit')}
-          vantaEffect="fog"
-          vantaOptions={{ highlightColor: 0x22d3ee, midtoneColor: 0x06b6d4, lowlightColor: 0x0e7490, baseColor: 0x0b1220 }}
-        />
+        {projects.map((project) => (
+          <ProjectCard
+            key={project.key}
+            imageSrc={project.imageSrc}
+            imageAlt={t(`portfolio.${project.key}Title`)}
+            title={t(`portfolio.${project.key}Title`)}
+            description={t(`portfolio.${project.key}Desc`)}
+            chips={project.chips}
+            href={project.href}
+            visitLabel={t('portfolio.visit')}
+          />
+        ))}
       </div>
     </div>
   );

@@ -10,11 +10,16 @@ export const localeMeta = {
 export const dictionary = {
   en: {
     nav: {
-      about: "About",
+      about: "About Me",
       resume: "Resume",
-      portfolio: "Work",
-      certifications: "Certs",
-      languages: "Lang",
+      portfolio: "Portfolio",
+      certifications: "Certifications",
+      languages: "Languages",
+      aboutShort: "About",
+      resumeShort: "Resume",
+      portfolioShort: "Work",
+      certificationsShort: "Certs",
+      languagesShort: "Lang",
       downloadResume: "Download Resume",
     },
     role: "Full Stack Developer",
@@ -110,17 +115,18 @@ export const dictionary = {
       title: "Portfolio",
       visit: "Visit Project",
       inProgress: "In Progress",
-      aryaDesc:
-        "A comprehensive CMS system including mission assignment, cost calculation, user management, inventory management, and equipment management.",
-      geokhuzTitle: "Geokhuz Surveying Company",
-      geokhuzDesc:
-        "A corporate website for a surveying firm showcasing services (UTM, cadastre, aerial mapping), equipment calibration, sales, and contact details, optimized for clarity and lead generation.",
-      lcTitle: "NC Specialty Laser Clinic",
-      lcDesc:
-        "A clean, conversion-focused clinic website featuring services, appointment CTA, contact details, and responsive design.",
-      utmplusTitle: "MapDraft",
-      utmplusDesc:
-        "An online surveying drafting tool that renders annotations from survey data, supports in-site editing, computations, table generation, and multiple export formats.",
+      crmTitle: "Pourdian CRM",
+      crmDesc:
+        "A full-featured business management system with sales, inventory, purchasing, customers, shipping, reports, analytics, and online store tools in one dashboard.",
+      calTitle: "Inspection Cost Calculator",
+      calDesc:
+        "A mission calculator for standard inspection and sampling services: destination distance, sample counts, service types, expert rates, VAT, and proforma-ready estimates.",
+      carTitle: "Vehicle Inspection Automation",
+      carDesc:
+        "A standard vehicle inspection automation platform for inspection staff workflows, digital checklists, and consistent quality control across missions.",
+      taganehTitle: "Taganeh News Search",
+      taganehDesc:
+        "A news search engine that aggregates and organizes headlines from multiple sources so users can discover and follow the latest stories faster.",
     },
     certifications: { title: "Certifications" },
     languages: {
@@ -134,11 +140,16 @@ export const dictionary = {
   },
   fa: {
     nav: {
-      about: "درباره",
+      about: "درباره من",
       resume: "رزومه",
-      portfolio: "کارها",
-      certifications: "مدارک",
-      languages: "زبان",
+      portfolio: "نمونه‌کارها",
+      certifications: "گواهی‌نامه‌ها",
+      languages: "زبان‌ها",
+      aboutShort: "درباره",
+      resumeShort: "رزومه",
+      portfolioShort: "کارها",
+      certificationsShort: "مدارک",
+      languagesShort: "زبان",
       downloadResume: "دانلود رزومه",
     },
     role: "توسعه‌دهنده فول‌استک",
@@ -222,15 +233,18 @@ export const dictionary = {
       title: "نمونه‌کارها",
       visit: "مشاهده پروژه",
       inProgress: "در حال انجام",
-      aryaDesc: "یک سیستم جامع CMS شامل واگذاری ماموریت، محاسبه هزینه، مدیریت کاربران، مدیریت انبار و مدیریت تجهیزات.",
-      geokhuzTitle: "شرکت نقشه‌برداری ژئوخوز",
-      geokhuzDesc:
-        "وب‌سایت شرکتی برای معرفی خدمات نقشه‌برداری (UTM، کاداستر، نقشه‌برداری هوایی)، کالیبراسیون تجهیزات، فروش ملزومات و اطلاعات تماس؛ بهینه برای شفافیت خدمات و جذب مشتری.",
-      lcTitle: "کلینیک تخصصی لیزر NC",
-      lcDesc: "وب‌سایت کلینیک با تمرکز بر معرفی خدمات، فراخوان رزرو وقت، اطلاعات تماس و طراحی واکنش‌گرا.",
-      utmplusTitle: "نقشه‌نگار",
-      utmplusDesc:
-        "ابزار آنلاین ترسیم نقشه برای نقشه‌برداری که متن‌ها و عوارض حاصل از داده‌های برداشت را رسم می‌کند، امکان ویرایش در سایت، انجام محاسبات، تولید جدول‌ها و خروجی‌های متنوع را فراهم می‌کند.",
+      crmTitle: "سامانه CRM پوردیان",
+      crmDesc:
+        "سامانه جامع مدیریت کسب‌وکار با امکانات کامل فروش، موجودی، خرید، مشتریان، ارسال، گزارش‌ها، تحلیل‌ها و فروشگاه آنلاین در یک داشبورد.",
+      calTitle: "محاسبه‌گر ماموریت و تعرفه",
+      calDesc:
+        "محاسبه‌گر هزینه خدمات بازرسی و نمونه‌برداری استاندارد؛ بر اساس شهر مقصد، مسافت، تعداد نمونه، نوع خدمت، نرخ کارشناسی، مالیات و صدور پیش‌فاکتور.",
+      carTitle: "اتوماسیون بازرسی خودرو",
+      carDesc:
+        "سامانه اتوماسیون بازرسی خودرو استاندارد برای گردش‌کار پرسنل، چک‌لیست دیجیتال و کنترل کیفیت یکپارچه در مأموریت‌های بازرسی.",
+      taganehTitle: "تگانه؛ موتور جستجوی خبری",
+      taganehDesc:
+        "موتور جستجوی خبری برای گردآوری و ساماندهی اخبار از منابع مختلف تا کاربر سریع‌تر تیترها و مطالب روز را پیدا و دنبال کند.",
     },
     certifications: { title: "گواهی‌نامه‌ها" },
     languages: {
@@ -244,11 +258,16 @@ export const dictionary = {
   },
   ar: {
     nav: {
-      about: "نبذة",
-      resume: "السيرة",
-      portfolio: "أعمالي",
-      certifications: "شهادات",
-      languages: "لغة",
+      about: "نبذة عني",
+      resume: "السيرة الذاتية",
+      portfolio: "الأعمال",
+      certifications: "الشهادات",
+      languages: "اللغات",
+      aboutShort: "نبذة",
+      resumeShort: "سيرة",
+      portfolioShort: "أعمال",
+      certificationsShort: "شهادات",
+      languagesShort: "لغة",
       downloadResume: "تحميل السيرة",
     },
     role: "مطور متكامل",
@@ -344,17 +363,18 @@ export const dictionary = {
       title: "الأعمال",
       visit: "زيارة المشروع",
       inProgress: "قيد التنفيذ",
-      aryaDesc:
-        "نظام CMS شامل يشمل تعيين المهام وحساب التكاليف وإدارة المستخدمين والمخزون والمعدات.",
-      geokhuzTitle: "شركة المسح الجغرافي جيوخوز",
-      geokhuzDesc:
-        "موقع شركة للمسح يعرض الخدمات (UTM، الكاداستر، المسح الجوي) ومعايرة المعدات والمبيعات وبيانات التواصل، محسّن للوضوح وجذب العملاء.",
-      lcTitle: "عيادة الليزر التخصصية NC",
-      lcDesc:
-        "موقع عيادة نظيف يركز على التحويل مع الخدمات ودعوة لحجز الموعد وبيانات التواصل وتصميم متجاوب.",
-      utmplusTitle: "MapDraft",
-      utmplusDesc:
-        "أداة رسم خرائط مسح عبر الإنترنت ترسم التعليقات من بيانات المسح وتدعم التحرير في الموقع والحسابات وتوليد الجداول وصيغ تصدير متعددة.",
+      crmTitle: "نظام CRM پوردیان",
+      crmDesc:
+        "نظام شامل لإدارة الأعمال يوفر المبيعات والمخزون والمشتريات والعملاء والشحن والتقارير والتحليلات ومتجرًا إلكترونيًا في لوحة واحدة.",
+      calTitle: "حاسبة تكلفة المهام",
+      calDesc:
+        "حاسبة لخدمات الفحص وأخذ العينات القياسية: المسافة، عدد العينات، نوع الخدمة، أجور الخبراء، الضريبة وتقديرات جاهزة للفواتير المبدئية.",
+      carTitle: "أتمتة فحص المركبات",
+      carDesc:
+        "منصة أتمتة لفحص المركبات وفق معايير محددة لسير عمل الموظفين وقوائم التحقق الرقمية وضمان جودة موحدة.",
+      taganehTitle: "تگانه؛ محرك بحث إخباري",
+      taganehDesc:
+        "محرك بحث إخباري يجمع العناوين من مصادر متعددة وينظمها ليتمكن المستخدم من متابعة آخر الأخبار بسرعة أكبر.",
     },
     certifications: { title: "الشهادات" },
     languages: {
@@ -370,9 +390,14 @@ export const dictionary = {
     nav: {
       about: "Обо мне",
       resume: "Резюме",
-      portfolio: "Работы",
-      certifications: "Серт.",
-      languages: "Язык",
+      portfolio: "Портфолио",
+      certifications: "Сертификаты",
+      languages: "Языки",
+      aboutShort: "О себе",
+      resumeShort: "Резюме",
+      portfolioShort: "Работы",
+      certificationsShort: "Серт.",
+      languagesShort: "Язык",
       downloadResume: "Скачать резюме",
     },
     role: "Full Stack разработчик",
@@ -468,17 +493,18 @@ export const dictionary = {
       title: "Портфолио",
       visit: "Открыть проект",
       inProgress: "В работе",
-      aryaDesc:
-        "Комплексная CMS: назначение задач, расчёт затрат, управление пользователями, складом и оборудованием.",
-      geokhuzTitle: "Геодезическая компания Geokhuz",
-      geokhuzDesc:
-        "Корпоративный сайт геодезической фирмы: услуги (UTM, кадастр, аэросъёмка), калибровка оборудования, продажи и контакты — для ясности и лидогенерации.",
-      lcTitle: "Специализированная лазерная клиника NC",
-      lcDesc:
-        "Чистый сайт клиники с акцентом на конверсию: услуги, CTA записи, контакты и адаптивный дизайн.",
-      utmplusTitle: "MapDraft",
-      utmplusDesc:
-        "Онлайн-инструмент геодезического черчения: аннотации из данных съёмки, редактирование на сайте, вычисления, таблицы и экспорт в разных форматах.",
+      crmTitle: "CRM Pourdian",
+      crmDesc:
+        "Полнофункциональная система управления бизнесом: продажи, склад, закупки, клиенты, доставка, отчёты, аналитика и интернет-магазин в одной панели.",
+      calTitle: "Калькулятор стоимости миссий",
+      calDesc:
+        "Калькулятор стандартных услуг инспекции и отбора проб: расстояние, число проб, тип услуги, ставки экспертов, НДС и оценка для проформы.",
+      carTitle: "Автоматизация техосмотра",
+      carDesc:
+        "Платформа автоматизации стандартного осмотра автомобилей для рабочих процессов персонала, цифровых чек-листов и единого контроля качества.",
+      taganehTitle: "Taganeh — новостной поиск",
+      taganehDesc:
+        "Новостной поисковик, который собирает и упорядочивает заголовки из разных источников, чтобы быстрее находить актуальные новости.",
     },
     certifications: { title: "Сертификаты" },
     languages: {

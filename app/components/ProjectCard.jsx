@@ -11,7 +11,7 @@ export default function ProjectCard({ imageSrc, imageAlt, title, description, ch
     >
       <div className="relative w-full h-48">
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-cyan-400/50 via-cyan-600/40 to-blue-900/70" aria-hidden="true" />
-        <Image src={imageSrc} alt={imageAlt} fill className="object-contain" priority />
+        <Image src={imageSrc} alt={imageAlt} fill className="object-cover" priority />
       </div>
       <div className="p-6">
         <h3 className="text-xl font-bold mb-2 text-white">{title}</h3>
