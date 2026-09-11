@@ -1,8 +1,4 @@
 #!/usr/bin/env node
-/**
- * git auto for Pourdian portfolio
- * Runs: git add .  ->  git commit -m "10 <message>"  ->  git push origin main
- */
 import { execSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import path from "node:path";
@@ -19,54 +15,53 @@ function runCapture(cmd) {
   try {
     return run(cmd, { capture: true }).trim();
   } catch (err) {
-    const out = (err.stdout || "").toString().trim();
-    const errOut = (err.stderr || "").toString().trim();
-    return out || errOut;
+    return (err.stdout || "").toString().trim();
   }
 }
 
-function summarizeChanges(names) {
-  if (!names.length) return "update project files";
+function summarizeChanges() {
+  const names = runCapture("git diff --cached --name-only")
+    .split(/\r?\n/)
+    .filter(Boolean);
+
+  if (names.length === 0) return "update project files";
 
   const joined = names.join(" ").toLowerCase();
   const parts = [];
 
-  if (joined.includes("sidebarcontent") || joined.includes("projectcard") || joined.includes("portfolio") || joined.includes("crm-pourdian") || joined.includes("taganeh") || joined.includes("cal-afg") || joined.includes("car-afg")) {
-    parts.push("refresh portfolio with CRM, calculator, car inspection, and Taganeh");
-  }
-  if (joined.includes("sidebar.jsx") || joined.includes("dictionary") || joined.includes("language")) {
-    parts.push("improve sidebar layout and multilingual nav");
+  if (joined.includes("sidebar") || joined.includes("dictionary") || joined.includes("language")) {
+    parts.push("fix sidebar menu layout and widen navigation");
   }
   if (joined.includes("git-auto") || joined.includes("package.json")) {
     parts.push("add git auto helper");
   }
 
   if (parts.length) return parts.join("; ");
-  if (names.length === 1) return `update ${path.basename(names[0])}`;
-  if (names.length <= 3) return `update ${names.map((n) => path.basename(n)).join(", ")}`;
+
+  if (names.length === 1) {
+    return `update ${path.basename(names[0])}`;
+  }
+  if (names.length <= 3) {
+    return `update ${names.map((n) => path.basename(n)).join(", ")}`;
+  }
   return `update ${names.length} files`;
 }
 
 const root = process.cwd();
 if (!existsSync(path.join(root, ".git"))) {
-  console.error("Not a git repository. Run from project root.");
+  console.error("Not a git repository.");
   process.exit(1);
 }
 
-console.log("[git auto] project:", root);
 console.log("> git add .");
 run("git add .");
 
-const names = runCapture("git diff --cached --name-only")
-  .split(/\r?\n/)
-  .map((s) => s.trim())
-  .filter(Boolean);
-
-if (!names.length) {
-  console.log("Nothing new to commit. Pushing origin main...");
+const staged = runCapture("git diff --cached --name-only");
+if (!staged) {
+  console.log("Nothing to commit. Pushing current branch...");
 } else {
-  const message = `10 ${summarizeChanges(names)}`;
-  console.log(`> git commit -m ${JSON.stringify(message)}`);
+  const message = `10 ${summarizeChanges()}`;
+  console.log(`> git commit -m "${message}"`);
   try {
     run(`git commit -m ${JSON.stringify(message)}`);
   } catch {
@@ -78,7 +73,7 @@ if (!names.length) {
 console.log("> git push origin main");
 try {
   run("git push origin main");
-  console.log("git auto finished.");
+  console.log("Done.");
 } catch {
   console.error("Push failed.");
   process.exit(1);
