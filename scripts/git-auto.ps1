@@ -61,6 +61,11 @@ else {
 }
 
 Write-Host "> git push origin main" -ForegroundColor Cyan
+git pull --rebase origin main
+if ($LASTEXITCODE -ne 0) {
+  Write-Host "Pull rebase failed. Resolve conflicts, then run git auto again." -ForegroundColor Red
+  exit 1
+}
 git push origin main
 if ($LASTEXITCODE -ne 0) {
   Write-Host "Push failed." -ForegroundColor Red

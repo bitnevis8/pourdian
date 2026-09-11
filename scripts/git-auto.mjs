@@ -81,9 +81,10 @@ if (!staged) {
 
 console.log("> git push origin main");
 try {
+  run("git pull --rebase origin main");
   run("git push origin main");
   console.log("Done.");
 } catch {
-  console.error("Push failed.");
+  console.error("Push failed. If pull rebase conflicted, resolve it and run git auto again.");
   process.exit(1);
 }
